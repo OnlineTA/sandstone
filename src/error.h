@@ -1,3 +1,7 @@
+// Copyright (C) 2014 Kiy Avenue.
+//
+// Sandstone Basic License - Version 0.2 - June 16, 2014.
+
 #ifndef SANDSTONE_ERROR_H
 #define SANDSTONE_ERROR_H
 
