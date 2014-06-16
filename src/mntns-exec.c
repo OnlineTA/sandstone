@@ -2,6 +2,9 @@
 //
 // Sandstone Basic License - Version 0.2 - June 16, 2014.
 
+// Execute a program contained in a mount namespace. Largely equivalent to
+// unshare -m, but no reliance on a preexisting shell.
+
 #define _GNU_SOURCE     // Necessary to get CLONE_*.
 
 #include <stdlib.h>     // exit, EXIT_*
