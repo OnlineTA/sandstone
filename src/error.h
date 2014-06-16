@@ -14,6 +14,6 @@
   basename(__FILE__), __LINE__, (msg), strerror(errno)))
 
 // Note, the macro will fail if no msg argument is passed, or if the passed
-// macro is not a C string.
+// msg is not a C string.
 
 #endif // SANDSTONE_ERROR_H
