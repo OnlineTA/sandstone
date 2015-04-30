@@ -10,3 +10,14 @@ support of executing unreliable code. The
 entails letting unreliable code make use of OS resources, without letting it
 .I abuse
 the resources to unintended ends.
+
+Sandboxing is
+.I fine-grained
+if tight limits can be imposed low-level OS resources. Sandboxing is
+.I composable
+if sandboxes can be further sandboxed.
+
+Sandstone is designed for
+.I fine-grained, composable sandboxing
+\- it aims to be a collection of small, simple user-space utilities, composable
+to form environments sandboxed to your hearts' content.
