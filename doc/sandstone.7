@@ -21,3 +21,22 @@ Sandstone is designed for
 .I fine-grained, composable sandboxing
 \- it aims to be a collection of small, simple sandboxing utilities, composable
 to form environments sandboxed to your hearts' content.
+
+Sandstone takes a
+.I structured programming approach
+to sandboxing, in firm belief that neither a purely
+.I declarative
+, nor a purely
+.I imperative
+approach is sufficiently eloquent for the specification of sandboxes for use in
+Computer Science education. In-how-far this also holds in your domain, is left
+as an exercise for the reader.
+
+In practice, this means that there are no "configuration files" in Sandstone.
+Every sandbox is either a pre-compiled sandboxing program, or a chain of
+pre-compiled sandboxing programs.
+
+This approach offers the eloquent sandboxer optional fine-grained control of
+sandbox construction and teardown. It is easy to add custom steps, and
+mix-and-match predefined steps. For instance, to store the I/O scratchspace of
+a sandbox for further storage and evaluation, as it is taken down.
