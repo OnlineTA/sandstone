@@ -5,3 +5,4 @@ LDFLAGS=
 all:
 	mkdir --parents ./bin/
 	$(CC) $(CFLAGS) $(LDFLAGS) -o ./bin/mntns-exec ./src/mntns-exec.c
+	$(CC) $(CFLAGS) $(LDFLAGS) -o ./bin/romount-exec ./src/romount-exec.c
