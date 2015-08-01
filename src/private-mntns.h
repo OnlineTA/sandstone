@@ -19,5 +19,10 @@
 // $ unshare -m
 // $ mount --make-rprivate /
 
+#ifndef SANDSTONE_PRIVATE_MNTNS_H
+#define SANDSTONE_PRIVATE_MNTNS_H
+
 void
 private_mntns_exec(int argc, char *const argv[]);
+
+#endif // SANDSTONE_PRIVATE_MNTNS_H
