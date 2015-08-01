@@ -1,32 +1,14 @@
-// Copyright (C) 2015 OnlineTA.
+// Copyright (c) 2015 OnlineTA.
 //
-// Sandstone Basic License - Version 0.2 - June 16, 2014.
+// Sandstone Basic License - Version 3.0 - May 4, 2015.
 
 #ifndef SANDSTONE_CTRL_FLOW_H
 #define SANDSTONE_CTRL_FLOW_H
 
-#include <errno.h>      // errno
-#include <error.h>      // error
-#include <stdlib.h>     // exit, EXIT_FAILURE, EXIT_SUCCESS
-#include <unistd.h>     // execvp
+void
+stone_break(int errnum, const char *format, ...);
 
-static inline void
-stone_break(const char *msg)
-{
-  error(EXIT_FAILURE, errno, msg);
-}
-
-static inline void
-stone_continue(const char *fail_msg, int argc, char *argv[])
-{
-  if (argc > 1)
-  {
-    execvp(argv[1], argv + 1);
-
-    stone_break(fail_msg);
-  }
-
-  exit(EXIT_SUCCESS);
-}
+void
+stone_continue(int argc, char *const argv[], const char *format, ...);
 
 #endif // SANDSTONE_CTRL_FLOW_H
