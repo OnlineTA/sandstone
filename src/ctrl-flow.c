@@ -41,7 +41,7 @@ stone_continue(int argc, char *const argv[], const char *format, ...)
 
   if (argc > 1)
   {
-    execvp(argv[1], argv + 1, NULL);
+    execvpe(argv[1], argv + 1, NULL);
 
     // Setting envp (last argument of execvpe) to NULL results in execvpe
     // deriving a default PATH environment variable. From the documentation it
