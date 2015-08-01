@@ -32,4 +32,4 @@ ctrl-flow.o: \
 
 clean:
 	rm -f *.o
-	rm -rf ../bin/
+	rm -f ../bin/*
