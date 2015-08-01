@@ -3,7 +3,7 @@
 // Sandstone Basic License - Version 3.0 - May 4, 2015.
 
 // Execute a program contained in a new mount namespace. All mount points get
-// blatanetly copied into the sandbox, and so all mount points below / inside
+// blatanetly copied into the sandbox, and so all mount points below '/' inside
 // the sandbox are also (recursively) marked as private.
 //
 // A private mark is the default, but someone might've made something shared on
@@ -46,8 +46,8 @@ mark_root_rprivate()
   }
 }
 
-int
-main(const int argc, char *const argv[])
+void
+private_mntns_exec(int argc, char *const argv[])
 {
   unshare_mntns();
   mark_root_rprivate();

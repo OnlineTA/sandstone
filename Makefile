@@ -9,10 +9,21 @@ all: bin ./bin/private-mntns-exec
 bin:
 	mkdir ./bin/
 
-./bin/private-mntns-exec: ./bin/ctrl-flow.o ./src/private-mntns.c
+./bin/private-mntns-exec: \
+		./src/ctrl-flow.o \
+		./src/private-mntns.o \
+		./src/private-mntns-exec.c
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
-./bin/ctrl-flow.o: ./src/ctrl-flow.c ./src/ctrl-flow.h
+./src/private-mntns.o: \
+		./src/private-mntns.c \
+		./src/private-mntns.h \
+		./src/ctrl-flow.h
+	$(CC) $(CFLAGS) -o $@ -c $<
+
+./src/ctrl-flow.o: \
+		./src/ctrl-flow.c \
+		./src/ctrl-flow.h
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 #./bin/squashed-rootfs-exec: ./src/
@@ -20,4 +31,5 @@ bin:
 #    ./src/squashed-rootfs-exec.c
 
 clean:
+	rm ./src/*.o
 	rm -rf ./bin/
