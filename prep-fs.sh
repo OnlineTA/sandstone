@@ -28,4 +28,4 @@ function required {
   done
 }
 
-required "${BINARY}"
+required "${BINARY}" | sort -n | uniq
