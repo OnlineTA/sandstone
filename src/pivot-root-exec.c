@@ -2,11 +2,11 @@
 //
 // Sandstone Basic License - Version 3.0 - May 4, 2015.
 
-#include "private-mntns.h"
+#include "pivot-root.h"
 
 int
-main(int argc, char *const argv[])
+main(int argc, char * argv[])
 {
-  private_mntns_exec(argc - 1, argv + 1);
+  pivot_root_exec(argc - 1, argv + 1);
   return 0;
 }

@@ -2,14 +2,14 @@
 .SH NAME
 sandstone \- user-space utilities for fine-grained, composable sandboxing
 .SH DESCRIPTION
-.SS Terms
+.SS Introduction and Concepts
 .I Sandboxing
 is the virtualisation and confinement of operating-system(OS) resources in
 support of executing unreliable code. The
 .I art of sandboxing
-entails letting unreliable code make use of OS resources, without letting it
+is to let unreliable code make use of OS resources, without letting it
 .I abuse
-the resources to unintended ends.
+them to unintended ends.
 
 Sandboxing is
 .I fine-grained
@@ -19,24 +19,99 @@ if sandboxes can be further sandboxed.
 
 Sandstone is designed for
 .I fine-grained, composable sandboxing
-\- it aims to be a collection of small, simple sandboxing utilities, composable
-to form environments sandboxed to your hearts' content.
+\- it aims to be a collection of short, simple, clear sandboxing utilities,
+composable to form environments sandboxed to your hearts' content.
 
 Sandstone takes a
 .I structured programming approach
 to sandboxing, in firm belief that neither a purely
-.I declarative
+.IR declarative
 , nor a purely
-.I imperative
-approach is sufficiently eloquent for the specification of sandboxes for use in
-Computer Science education. In-how-far this also holds in your domain, is left
-as an exercise for the reader.
+.IR imperative
+approach is sufficient for eloquent sandboxing.
 
-In practice, this means that there are no "configuration files" in Sandstone.
-Every sandbox is either a pre-compiled sandboxing program, or a chain of
-pre-compiled sandboxing programs.
+In practice, this means that there are no "configuration files" in Sandstone:
+every sandbox is either a pre-compiled sandboxing utility, or a chain of
+sandboxing utilities. This offers the eloquent sandboxer optional, fine-grained
+control of sandbox construction and teardown.
 
-This approach offers the eloquent sandboxer optional fine-grained control of
-sandbox construction and teardown. It is easy to add custom steps, and
-mix-and-match predefined steps. For instance, to store the I/O scratchspace of
-a sandbox for further storage and evaluation, as it is taken down.
+.SS Design Goals
+.TP
+.B 1. A Unix-like philosophy
+
+Sandstone sandboxing utilities aim to follow a Unix-like philosophy, at least,
+in the following sense:
+
+\*(lqWrite programs that do one thing and do it well.  Write programs to work
+together.\*(rq
+
+Every sandboxing utility in sandstone is a small program which is easy to test
+and maintain. Sandstone utilities use few userland programs and libraries. If
+we can make due with talking to the kernel, we make due with talking to the
+kernel. The sandboxing utilities are structured so as to be chained together to
+form more elaborate sandboxes.
+
+The power of sandstone comes from the combination of sandboxing utilities
+rather than from the sandboxing utilities themselves.
+
+All these factors encourage the simplicity due to isolation, and robustness due
+to scrutiny of the individual components of Sandstone.
+
+We believe that this approach will help to eventually make Sandstone
+.I robust
+,
+.I stable
+, and
+.I easily maintainable
+.
+
+.TP
+.B 2. Stability and iterative refinement
+
+A bump in the Sandstone version number marks the addition of new sandboxing
+utilities or the refinement of existing utilities. As such, it marks the
+refinement of the sandboxing capabilities offered by Sandstone as a whole.
+
+Sandstone uses an
+.I irrational version numbering system
+: as the source code progresses, its version number closer approximates an irrational number, in particular
+
+.TP
+.B 3. A proactive stance on security
+
+Sandstone is designed in anticipation of having to fend off attacks from
+malicious code running in its sandboxes.
+
+This design goal almost suggests itself when dealing with sandboxing
+.I untrusted
+code. We say
+.I almost
+because in certain social contexts, sandboxed code can be expected not to
+misbehave, in general. However, we find that technical impossibility is more
+reliable in the long run, than legal responsibility.
+
+In practice, this means that (1) we fix bugs as soon as they are discovered,
+without due proof of their exploitability, (2) we employ multilevel security:
+if one level fails, another can try to pick up the slack, and (3) we
+proactively try to break out of our own sandboxes, and encourage others to try
+to do so as well.
+
+.SS Disclaimers
+.TP
+.B 1. Sandstone, at its core, is for sandboxing experts
+
+As with virtually any utilities that follow a Unix-like philosophy, core
+Sandstone utilities are stealth, double-edged swords. It requires an expert to
+compose a Sandstone sandbox that suits your needs, and doesn't open the
+flood-gates for your adversaries.
+
+This is why Sandstone has a liberal license. Sandstone developers cannot claim
+to have designed an interface that will suit your needs, no matter how you
+compose your sandboxes. For now, we leave this to the service industry.
+
+.TP
+.B 2. Chainable sandboxing is not our invention
+
+Chainable sandboxes sort of spring to mind as you try to understand how
+.BR unshare(1)
+works.

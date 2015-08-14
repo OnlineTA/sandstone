@@ -15,7 +15,10 @@
 // sandbox will be automatically unmounted when the last (grand)child of this
 // process terminates.
 //
-// This is equivalent to the following sequence of shell commands: $ unshare -m
+// This is equivalent to the following sequence of shell commands:
+//
+// $ unshare -m
+//
 // $ mount --make-rprivate /
 
 #define _GNU_SOURCE     // Necessary to get CLONE_NEWNS from <sched.h>.
@@ -23,8 +26,6 @@
 #include <stddef.h>     // NULL
 #include <sys/mount.h>  // mount, MS_REC, MS_PRIVATE
 #include <errno.h>      // errno
-
-#include <stdio.h>
 
 #include "ctrl-flow.h"  // stone_error, stone_continue
 
