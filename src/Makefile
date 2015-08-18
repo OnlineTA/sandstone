@@ -5,6 +5,7 @@ CFLAGS=-Wall -Wextra -Werror -pedantic -std=gnu11
 LDFLAGS=
 
 all: ../bin \
+		../bin/pidns \
 		../bin/private-mntns \
 		../bin/mount-squashfs \
 		../bin/pivot-root \
@@ -12,6 +13,12 @@ all: ../bin \
 
 ../bin:
 	mkdir ../bin/
+
+../bin/pidns: \
+		ctrl-flow.o \
+		pidns.o \
+		pidns-exec.c
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
 ../bin/private-mntns: \
 		ctrl-flow.o \
@@ -33,8 +40,20 @@ all: ../bin \
 
 ../bin/init: \
 		ctrl-flow.o \
+		pivot-root.h \
 		init.c
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
+
+cgroups.o: \
+		cgroups.c \
+		cgroups.h
+	$(CC) $(CFLAGS) -o $@ -c $<
+
+pidns.o: \
+		pidns.c \
+		pidns.h \
+		ctrl-flow.h
+	$(CC) $(CFLAGS) -o $@ -c $<
 
 private-mntns.o: \
 		private-mntns.c \
