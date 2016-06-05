@@ -19,6 +19,11 @@ setuid_exec(int argc, char *argv[])
   unsigned long int uid;
   char *endptr;
 
+  if (geteuid() != 0)
+  {
+    stone_break(0, "Must be root to run setuid.\n");
+  }
+
   if (argc > 1)
   {
     uid = strtoul(*argv, &endptr, 10);
