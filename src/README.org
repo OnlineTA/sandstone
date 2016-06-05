@@ -1,0 +1,12 @@
+** Examples:
+
+*** =setuid=
+
+An example of using =capsh(1)= to run =setuid= with minimal sufficient
+permissions.
+
+#+BEGIN_SRC sh
+sudo capsh --caps="cap_setuid+ep" -- -c "../bin/setuid 65534 sh -c 'capsh --print'"
+#+END_SRC
+
+This is perhaps work-in-progress towards a more fine-grained =sudo(8)=...
