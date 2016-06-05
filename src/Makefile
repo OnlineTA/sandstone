@@ -9,6 +9,7 @@ all: ../bin \
 		../bin/private-mntns \
 		../bin/mount-squashfs \
 		../bin/pivot-root \
+		../bin/setuid \
 		../bin/init
 
 ../bin:
@@ -18,6 +19,12 @@ all: ../bin \
 		ctrl-flow.o \
 		pidns.o \
 		pidns-exec.c
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
+
+../bin/cgroups: \
+		ctrl-flow.o \
+		cgroups.o \
+		cgroups-exec.c
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
 ../bin/private-mntns: \
@@ -36,6 +43,12 @@ all: ../bin \
 		ctrl-flow.o \
 		pivot-root.o \
 		pivot-root-exec.c
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
+
+../bin/setuid: \
+		ctrl-flow.o \
+		setuid.o \
+		setuid-exec.c
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
 ../bin/init: \
